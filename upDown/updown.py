@@ -32,8 +32,8 @@ def scancomplete(): # Scan complete print
 
 def scanresults(timerresult, timescale, down, up, crimeflare):
 	print "Time taken to complete scan: ", timerresult, timescale
-	print "Tangos down: ", down,"   (", downpercentage, "%)"
-	print "Up and running: ", up,"    (", uppercentage, "%)"
+	print "Tangos down: ", down
+	print "Up and running: ", up
 	print "Potentially Cloudflare'd: ", crimeflare
 
 if len(sys.argv) < 3: # If there's less than 3 arugments, ex: updown.py -t and no textfile selected / updown.py and no mode or textfile/ domain selected
