@@ -1,5 +1,9 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*
+
+# Made by peanutButter
+# Made for Anonymous / #OpDDOSisis
+
 from sys import argv
 import sys
 import time
