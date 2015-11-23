@@ -6,7 +6,7 @@ Detects Cloudflare protections.
 ~ Made by #peanutButter for OpDDOSISIS
 
 # Usage:
-Two options avaliable:
+Three options avaliable:
 
     -t for checking a textfile
     -d for checking a single domain
