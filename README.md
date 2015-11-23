@@ -10,14 +10,14 @@ Two options avaliable:
 
     -t for checking a textfile
     -d for checking a single domain
-	-r for repeating a check multiple times
+    -r for repeating a check multiple times
 Textfile check:
 
     python updown.py -t weblist.txt
-Single domain check:
+Single Domain check:
 
     python updown.py -d http://example.com
-	
-	python updown.py -r http://example.com
-	It would ask you how much times do you want (0 times = Infinite) to repeat the scan and how much delay do you want between each scan.
-	After getting both of those it would output the results.
+Repeated Domain check:
+		python updown.py -r http://example.com
+		Once launched would ask for a number of times to repeat (0 for unlimited)
+		Would also ask for delay between every scan
