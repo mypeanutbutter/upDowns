@@ -16,7 +16,7 @@ from timeit import default_timer as timer
 from colorama import Fore, Back, Style
 from os.path import exists
 
-## Variables for counting
+## Variables for counting, mainly for the textfile webcheck, the defined single target webcheck doesn't require it anymore.
 up = 0 # Variable for amount of websites that are up in the scan
 down = 0 # Variable for amount of websites that are down in the scan
 crimeflare = 0 # Variable for amount of websites that are potentially protected by cloudflare (Error 403)
@@ -25,7 +25,7 @@ sprinklyline = "~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~*~~" # Cus why not
 
 ## Welcome message
 print sprinklyline
-print("   Check for online websites, by peanutButter")
+print("   upDowns, by peanutButter")
 print("       Peanut Butter is tasty. yum.")
 print sprinklyline
 
