@@ -13,7 +13,6 @@ from urllib2 import Request, urlopen, HTTPError, URLError
 import httplib
 from time import localtime, strftime
 from timeit import default_timer as timer
-from colorama import Fore, Back, Style
 from os.path import exists
 
 ## Variables for counting, mainly for the textfile webcheck, the defined single target webcheck doesn't require it anymore.
@@ -31,7 +30,7 @@ print sprinklyline
 
 def scancomplete(): # Scan complete print
 	print sprinklyline
-	print(Back.GREEN + Fore.WHITE +"       Scan complete " + Style.RESET_ALL + ", Results are above!")
+	print("       Scan complete, Results are above!")
 	print sprinklyline	
 
 def scanresults(timerresult, timescale, down, up, crimeflare):
@@ -41,10 +40,10 @@ def scanresults(timerresult, timescale, down, up, crimeflare):
 	print "Potentially Cloudflare'd: ", crimeflare
 
 if len(sys.argv) < 3: # If there's less than 3 arugments, ex: updown.py -t and no textfile selected / updown.py and no mode or textfile/ domain selected
-	print(Fore.WHITE + "No options selected, Examples can be seen below:" + Style.RESET_ALL)
+	print("No options selected, Examples can be seen below:")
 	print "Avaliable options for use:"
-	print("      "+ Fore.WHITE + Back.GREEN + "-d" + Style.RESET_ALL + " Domain -> For single website checks")
-	print("      "+ Fore.WHITE + Back.GREEN + "-t" + Style.RESET_ALL + " Textfile -> For a textfile with a bunch of websites")
+	print("      -d Domain -> For single website checks")
+	print("      -t Textfile -> For a textfile with a bunch of websites")
 	print sprinklyline
 
 else:
@@ -66,22 +65,22 @@ else:
 			page_open = urlopen(req)
 		except HTTPError, e: # If there's an HTTP
 			if e.code==403: # Check for error 403, mark as cloudflare and up
-				print(Fore.WHITE + target + Fore.GREEN + u"\u2713" +" Is up! (Cloudflare?)" + Style.RESET_ALL)
+				print(target + u"\u2713" +" Is up! (Cloudflare?)")
 				websitecheck.crimeflare += 1
 				websitecheck.up += 1
 			else: #Anything other than 403 = down
-				print(Fore.WHITE + target + Fore.RED + u"\u2718" +" Is down! Error recieved : %s, %s" + Style.RESET_ALL) % (e.code, e.reason)
+				print(target + u"\u2718" +" Is down! Error recieved : %s, %s") % (e.code, e.reason)
 				websitecheck.down += 1
 		except URLError, e: # If there's an URL error
-			print(Fore.WHITE + target + Fore.RED + u"\u2718" +" Is down! : %s" + Style.RESET_ALL) % (e.reason)
+			print(target + u"\u2718" +" Is down! : %s") % (e.reason)
 			websitecheck.down += 1
 		except httplib.HTTPException, e:
-   			print(Fore.WHITE + target + Fore.RED + u"\u2718" +" Not sure? HTTP Exception" + Style.RESET_ALL)
+   			print(target + u"\u2718" +" Not sure? HTTP Exception")
 		except Exception:
     			import traceback
-    			print(Fore.YELLOW + "Not sure, Generic exception while checking: " + Fore.WHITE + target + Fore.YELLOW + "(Connection reset by peer)" + Style.RESET_ALL)
+    			print("Not sure, Generic exception while checking: " + target  + "(Connection reset by peer)")
 		else: # If its up and all goes well
-        		print(Fore.WHITE + target + Fore.GREEN + u"\u2713" +" Is up!" + Style.RESET_ALL)
+        		print(target + u"\u2713" +" Is up!")
 			websitecheck.up += 1
 
 	if mode == '-d': # If mode -d selected, domain check.
@@ -109,12 +108,12 @@ else:
 		scancomplete() # Prints scan complete text
 
 	if mode == '-r':
-		numberoftimes = raw_input(Fore.WHITE + "Enter number of times you want the scan to be running (0 = Infinite) : " + Style.RESET_ALL)
-		delay = raw_input(Fore.WHITE + "Enter the delay you want between each scan (Recommended: 5) : " + Style.RESET_ALL)
+		numberoftimes = raw_input("Enter number of times you want the scan to be running (0 = Infinite) : ")
+		delay = raw_input("Enter the delay you want between each scan (Recommended: 5) : ")
 		print sprinklyline
 		if numberoftimes == '0':
-			print (Fore.WHITE + """You've selected infinite times,
-you can press Ctrl + Z or Ctrl + C at any time to stop the scan.""" + Style.RESET_ALL)
+			print ("""You've selected infinite times,
+you can press Ctrl + Z or Ctrl + C at any time to stop the scan.""")
 			print sprinklyline
 			count = 1
 			while True: # Infinite loop
@@ -123,7 +122,7 @@ you can press Ctrl + Z or Ctrl + C at any time to stop the scan.""" + Style.RESE
 				time.sleep(int(delay)) # Apply selected delay
 				count += 1
 		else:
-			print (Fore.WHITE + "You will scan " + Fore.YELLOW + target + Fore.WHITE + " " + numberoftimes + " times, with a delay of " + delay + " seconds between each scan, Starting scan:" + Style.RESET_ALL)
+			print ("You will scan " + target + " " + numberoftimes + " times, with a delay of " + delay + " seconds between each scan, Starting scan:")
 			print sprinklyline
 			count = 0
 			while (count < int(numberoftimes)): # Creates an infinite loop if you use numberoftimes without int, don't ask me how \o/
@@ -135,7 +134,7 @@ you can press Ctrl + Z or Ctrl + C at any time to stop the scan.""" + Style.RESE
 	if mode == '-t': # If mode -t selected, textlist check.
 		if bool(exists(target)): # Check if the textfile set as target actually exists
 			txt = open(target) # Open text file specified
-			print (Fore.WHITE + "File information:" + Style.RESET_ALL)
+			print ("File information:")
 			print "Text file selected: ", target # Prints the text file selected
 
 			countlines = max(enumerate(open(target)))[0] # Returns number of lines minus 1
@@ -143,7 +142,7 @@ you can press Ctrl + Z or Ctrl + C at any time to stop the scan.""" + Style.RESE
 
 			print "Number of websites: ", lines # Returns number of websites in the text file (lines)
 			print sprinklyline
-			print (Fore.WHITE + "Scan process:" + Style.RESET_ALL)
+			print ("Scan process:")
 			print sprinklyline
 			
 			start = timer() # Start clock
@@ -158,22 +157,22 @@ you can press Ctrl + Z or Ctrl + C at any time to stop the scan.""" + Style.RESE
 					page_open = urlopen(req)
 				except HTTPError, e: # If there's an HTTP
 					if e.code==403: # Check for error 403, mark as cloudflare and up
-						print(Fore.WHITE + line + Fore.GREEN + u"\u2713" +" Is up! (Cloudflare?)" + Style.RESET_ALL)
+						print(line + u"\u2713" +" Is up! (Cloudflare?)")
 						crimeflare += 1
 						up += 1
 					else: #Anything other than 403 = down
-						print(Fore.WHITE + line + Fore.RED + u"\u2718" +" Is down! Error recieved : %s, %s" + Style.RESET_ALL) % (e.code, e.reason)
+						print(line + u"\u2718" +" Is down! Error recieved : %s, %s") % (e.code, e.reason)
 						down += 1
 				except URLError, e: # If there's an URL error
-					print(Fore.WHITE + line + Fore.RED + u"\u2718" +" Is down! : %s" + Style.RESET_ALL) % (e.reason)
+					print(line +u"\u2718" +" Is down! : %s") % (e.reason)
 					down += 1
 				except httplib.HTTPException, e:
-   					print(Fore.WHITE + line + Fore.RED + u"\u2718" +" Not sure? HTTP Exception" + Style.RESET_ALL)
+   					print(line + u"\u2718" +" Not sure? HTTP Exception")
 				except Exception:
     					import traceback
-    					print(Fore.YELLOW + "Generic exception while checking: " + Fore.WHITE + line + Fore.YELLOW + "(Connection reset by peer)" + Style.RESET_ALL)
+    					print("Generic exception while checking: " + line + "(Connection reset by peer)")
 				else: # If its up and all goes well
-        				print(Fore.WHITE + line + Fore.GREEN + u"\u2713" +" Is up!" + Style.RESET_ALL)
+        				print(line + u"\u2713" +" Is up!")
 					up += 1
 				print " " # Empty line for style
 				clinenum += 1
@@ -195,4 +194,4 @@ you can press Ctrl + Z or Ctrl + C at any time to stop the scan.""" + Style.RESE
 			scancomplete() # Prints scan completed text
 
 		else: # If the textfile provided doesn't exist
-			print (Fore.WHITE + "The text file you set as target doesn't exist, wrong path?" + Style.RESET_ALL)
+			print ("The text file you set as target doesn't exist, wrong path?")
